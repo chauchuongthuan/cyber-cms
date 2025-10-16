@@ -1,0 +1,61 @@
+<div class="subscriber" #mainScreen>
+  <nz-row [nzGutter]="16" class="head-table">
+    <div nz-col class="gutter-row pl-0" [nzSpan]="12">
+      <h3 style="padding-top: 6px;padding-left: 0;">Tickets ({{paginator.total}})</h3>
+    </div>
+    <div nz-col class="gutter-row filter-group" [nzSpan]="12">
+      <app-create-edit-subscriber #actionComponent (onSuccess)="onSuccess()"></app-create-edit-subscriber>
+      <button nz-button nzType="default" class="second-background" (click)="exportExcel()">
+        <span nz-icon nzType="download"></span>
+        Export excel
+      </button>
+    </div>
+  </nz-row>
+  <div class="filter">
+    <app-filter-subscriber (onFilter)="onFilter($event)"></app-filter-subscriber>
+  </div>
+  <nz-table (nzQueryParams)="tableChange($event)" [nzScroll]="{ y: 'calc(100vh - 310px)' }" #tableSubscriber
+    [nzTotal]="paginator.total" [nzPageSize]="paginator.limit" [nzPageIndex]="paginator.currentPage" nzOuterBordered
+    [nzData]="data.data" nzTableLayout="fixed" [nzLoading]="tableLoading" nzShowSizeChanger
+    [nzFrontPagination]="false">
+    <thead>
+      <tr>
+        <th *ngFor="let head of data.column" nzColumnKey="{{head.dataIndex}}" [nzSortFn]="true">{{head.name}}</th>
+      </tr>
+    </thead>
+    <tbody >
+      <ng-container>
+        <tr *ngFor="let renderData of data.data">
+          <td *ngFor="let temp of data.column">
+            <div *ngIf="!temp.listButton && !temp.isHTML && !temp.isActive">
+              {{ renderData[temp.dataIndex] }}
+            </div>
+            <div *ngIf="temp.isHTML">
+              <nz-tag *ngIf="renderData[temp.dataIndex] == true" [nzColor]="'green'">Active</nz-tag>
+              <nz-tag *ngIf="renderData[temp.dataIndex] == false" [nzColor]="'red'">Unactive</nz-tag>
+            </div>
+            <div *ngIf="temp.listButton">
+              <div nz-row>
+                <div *ngFor="let btn of renderData[temp.dataIndex]">
+                  <button *ngIf="btn.isComfirm" nz-button nzType="primary" [nzDanger]="btn.isDanger"
+                    nz-popconfirm nzPopconfirmTitle="{{btn.tip}}" nzPopconfirmPlacement="top" (nzOnConfirm)="btn.fn()"
+                    style="margin-left: 2px;">
+                    <span nz-icon nzType="{{btn.icon}}"></span>
+                  </button>
+                  <button *ngIf="!btn.isComfirm" nz-button nzType="primary" [nzDanger]="btn.isDanger"
+                    (click)="btn.fn()" style="margin-left: 2px;">
+                    <span nz-icon nzType="{{btn.icon}}"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="temp.isActive">
+              <nz-switch [ngModel]="renderData[temp.dataIndex]" (ngModelChange)="changeStatus(renderData.id, $event)">              
+              </nz-switch>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</div>

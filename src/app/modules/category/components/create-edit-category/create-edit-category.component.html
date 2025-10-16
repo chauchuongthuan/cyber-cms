@@ -1,0 +1,62 @@
+<button nz-button nzType="primary" (click)="open()">
+  <span nz-icon nzType="plus"></span>
+  Create
+</button>
+<app-digitop-drawer [title]="state+' product category'" [visible]="visible" 
+  [size]="size" (onConfirm)="confirmDrawer()" (onLeave)="close()">
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="categoryForm" (ngSubmit)="confirmDrawer()">
+      <div nz-row [nzGutter]="[hGutter, vGutter]">
+        <div nz-col class="gutter-row" [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">UnCategory <span class="required">(*)</span></nz-form-label><br>
+              <nz-switch formControlName="unCategory">
+              </nz-switch>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col class="gutter-row" [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">Thứ tự <span class="required">(*)</span></nz-form-label>
+              <nz-input-group>
+                <input formControlName="sortOrder" [ngClass]="submitted && categoryForm.get('sortOrder')?.errors ? 'ant-input-status-error ng-invalid' : ''" nz-input placeholder="Thứ tự" type="number" min="0" step="1"/>
+              </nz-input-group>
+              <div *ngIf="submitted && categoryForm.get('sortOrder')?.errors" class="input-text-error">
+                <span>Vui lòng nhập số thứ tự</span>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div nz-row [nzGutter]="[hGutter, vGutter]">
+        <div nz-col class="gutter-row" [nzSpan]="12">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">Name <span class="required">(*)</span></nz-form-label>
+              <nz-input-group>
+                <input formControlName="name" [ngClass]="submitted && categoryForm.get('name')?.errors ? 'ant-input-status-error ng-invalid' : ''" nz-input placeholder="Name" (ngModelChange)="onChangeTitle('vi')"/>
+              </nz-input-group>
+              <div *ngIf="submitted && categoryForm.get('name')?.errors" class="input-text-error">
+                <span>Please enter name!</span>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col class="gutter-row" [nzSpan]="12">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">Slug <span class="required">(*)</span></nz-form-label>
+              <nz-input-group>
+                <input formControlName="slug" nz-input placeholder="Tên slug" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </form>
+  </nz-spin>
+  </ng-container>     
+</app-digitop-drawer>

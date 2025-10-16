@@ -1,0 +1,110 @@
+<button nz-button nzType="primary" (click)="showLarge()">
+  <span nz-icon nzType="plus"></span>
+  Tạo mới
+</button>
+<app-digitop-drawer [title]="state + ' liên hệ'" [visible]="visible" [size]="size" (onConfirm)="confirmDrawer()"
+  (onLeave)="close()">
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="contactForm" (ngSubmit)="confirmDrawer()">
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Tên <span class="required">(*)</span></nz-form-label>
+                <nz-input-group>
+                  <input formControlName="name"
+                    [ngClass]="submitted && contactForm.get('name')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Tên" [ngClass]="isEdit ? 'disabled-ip' : ''" [readOnly]="isEdit"/>
+                </nz-input-group>
+                <div *ngIf="submitted && contactForm.get('name')?.errors" class="input-text-error">
+                  <span>Vui lòng nhập tên</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Trạng thái <span class="required">(*)</span></nz-form-label>
+                <nz-select formControlName="status" name="status" [ngModel]="'1'">
+                  <nz-option nzValue="1" nzLabel="New"></nz-option>
+                  <nz-option nzValue="2" nzLabel="Watched"></nz-option>
+                  <nz-option nzValue="3" nzLabel="Resolved"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Email <span class="required">(*)</span></nz-form-label>
+                <nz-input-group>
+                  <input formControlName="email"
+                    [ngClass]="submitted && contactForm.get('email')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Email" [ngClass]="isEdit ? 'disabled-ip' : ''" [readOnly]="isEdit"/>
+                </nz-input-group>
+                <div *ngIf="submitted && contactForm.get('email')?.errors" class="input-text-error">
+                  <span>Vui lòng nhập email</span>
+                </div>
+                <div *ngIf="submitted && contactForm.get('email')?.errors?.['pattern']" class="input-text-error">
+                  <span>Vui lòng nhập định dạng email</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Số điện thoại <span class="required">(*)</span></nz-form-label>
+                <nz-input-group>
+                  <input formControlName="phone"
+                    [ngClass]="submitted && contactForm.get('phone')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="SĐT" [ngClass]="isEdit ? 'disabled-ip' : ''" [readOnly]="isEdit"/>
+                </nz-input-group>
+                <div *ngIf="submitted && contactForm.get('phone')?.errors?.['required']" class="input-text-error">
+                  <span>Vui lòng nhập số điện thoại</span>
+                </div>
+                <div *ngIf="submitted && (contactForm.get('phone')?.errors?.['pattern'] || contactForm.get('phone')?.errors?.['minlength'] || contactForm.get('phone')?.errors?.['maxlength'])" class="input-text-error">
+                  <span>Vui lòng nhập định dạng SĐT</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Tin nhắn</nz-form-label>
+                <nz-input-group>
+                  <textarea
+                    [ngClass]="submitted && contactForm.get('message')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    rows="4" formControlName="message" nz-input [ngClass]="isEdit ? 'disabled-ip' : ''" [readOnly]="isEdit"></textarea>
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+              <nz-form-item>
+                <nz-form-control>
+                  <app-digitop-upload [fileList]="messageFile" [title]="'File tin nhắn'"
+                    (changeFile)="changeFileUpload($event, 'messageFile')" [multiple]="false" [deleteActive]="isEdit ? false : true" [disableUpload]="isEdit"></app-digitop-upload>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>     
+        </div>     
+      </form>
+      <!-- <div nz-row [nzGutter]="[hGutter, vGutter]" *ngIf="isEdit">
+        <div nz-col class="gutter-row" [nzSpan]="24">
+          <button (click)="exportFile(this.messageFile[0])">
+            <span nz-icon nzType="download" nzTheme="outline"></span>
+            Download
+          </button>
+        </div>   
+      </div> -->
+    </nz-spin>
+  </ng-container>
+</app-digitop-drawer>

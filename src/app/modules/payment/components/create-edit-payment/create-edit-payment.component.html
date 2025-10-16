@@ -1,0 +1,26 @@
+<!-- <button nz-button nzType="primary" (click)="open()">
+  <span nz-icon nzType="plus"></span>
+  Create
+</button> -->
+<app-digitop-drawer [title]="state+' payment'" [visible]="visible" 
+  [size]="size" (onConfirm)="confirmDrawer()" (onLeave)="close()">
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="paymentForm" (ngSubmit)="confirmDrawer()">
+      <div nz-row [nzGutter]="[hGutter, vGutter]">
+        <div nz-col class="gutter-row" [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">Status</nz-form-label>
+              <nz-select ngDefaultControl formControlName="status" >
+                <nz-option [nzValue]="1" nzLabel="PAID"></nz-option>
+                <nz-option [nzValue]="2" nzLabel="UNPAID"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </form>
+  </nz-spin>
+  </ng-container>     
+</app-digitop-drawer>

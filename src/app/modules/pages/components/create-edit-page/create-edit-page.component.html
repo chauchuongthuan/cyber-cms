@@ -1,0 +1,149 @@
+<button nz-button nzType="primary" (click)="open()">
+  <span nz-icon nzType="plus"></span>
+  Tạo mới
+</button>
+<app-digitop-drawer [title]="state+' bài viết'" [visible]="visible" 
+  [size]="size" (onConfirm)="confirmDrawer()" (onLeave)="visible=false">
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="pageForm" (ngSubmit)="confirmDrawer()">
+      <nz-tabset style="width: 100%;">
+        <!-- VIETNAMESE -->
+        <nz-tab nzTitle="Vietnamese" (nzSelect)="tabLocale = 'vi'" style="width: 100%;">
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+              <nz-form-item>
+                <nz-form-control>
+                  <nz-form-label [nzSpan]="'vertical'">Tên</nz-form-label>
+                  <nz-input-group>
+                    <input formControlName="name_vi" nz-input placeholder="Tên" type="text" />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+              <nz-collapse>
+                <nz-collapse-panel [nzHeader]="'SEO'">
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-form-label>Meta Image</nz-form-label>
+                      <app-digitop-upload [fileList]="this.pageForm.controls['metaImage_vi'].value" [multiple]="false"
+                        (changeFile)="changeFileUpload($event, 'metaImage_vi')" ></app-digitop-upload>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-input-group>
+                        <nz-form-label>Meta Title</nz-form-label>
+                        <input type="text" nz-input formControlName="metaTitle_vi" name="metaTitle_vi"
+                          placeholder="Meta Title">
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-input-group>
+                        <nz-form-label>Meta Title</nz-form-label>
+                        <textarea rows="6" type="text" nz-input formControlName="metaKeyword_vi" name="metaKeyword_vi"
+                          placeholder="Meta Keyword"></textarea>
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-input-group>
+                        <nz-form-label>Meta Title</nz-form-label>
+                        <textarea rows="6" type="text" nz-input formControlName="metaDescription_vi" name="metaDescription_vi"
+                          placeholder="Meta Description"></textarea>
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                </nz-collapse-panel>
+              </nz-collapse>  
+            </div>
+          </div>
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="3">
+              <button nz-button nzType="primary" >
+                Thêm section
+              </button>
+            </div>
+          </div>
+          <div>
+            <!-- section -->
+          </div>
+        
+        </nz-tab>
+        <!-- ENGLISH -->
+        <nz-tab nzTitle="English" (nzSelect)="tabLocale = 'en'" style="width: 100%;">
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+              <nz-form-item>
+                <nz-form-control>
+                  <nz-form-label [nzSpan]="'vertical'">Name</nz-form-label>
+                  <nz-input-group>
+                    <input formControlName="name_en" nz-input placeholder="Name" type="text" />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+              <nz-collapse>
+                <nz-collapse-panel [nzHeader]="'SEO'">
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-form-label>Meta Image</nz-form-label>
+                      <app-digitop-upload [fileList]="this.pageForm.controls['metaImage_en'].value"
+                        (changeFile)="changeFileUpload($event, 'metaImage_en')" ></app-digitop-upload>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-input-group>
+                        <nz-form-label>Meta Title</nz-form-label>
+                        <input type="text" nz-input formControlName="metaTitle_en" name="metaTitle_en"
+                          placeholder="Meta Title">
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-input-group>
+                        <nz-form-label>Meta Title</nz-form-label>
+                        <textarea rows="6" type="text" nz-input formControlName="metaKeyword_en" name="metaKeyword_en"
+                          placeholder="Meta Keyword"></textarea>
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-input-group>
+                        <nz-form-label>Meta Title</nz-form-label>
+                        <textarea rows="6" type="text" nz-input formControlName="metaDescription_en" name="metaDescription_en"
+                          placeholder="Meta Description"></textarea>
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                </nz-collapse-panel>
+              </nz-collapse>
+            </div>
+          </div>
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="3">
+              <button nz-button nzType="primary" >
+                Add section
+              </button>
+            </div>
+          </div>
+          
+        
+        </nz-tab>
+      </nz-tabset>
+    </form>
+  </nz-spin>
+  </ng-container>     
+</app-digitop-drawer>

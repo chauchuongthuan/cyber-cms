@@ -1,0 +1,52 @@
+<form [formGroup]="filterForm" style="margin-top: 20px;">
+  <h3>Filter</h3>
+  <div nz-row [nzGutter]="16">
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="'vertical'">Username</nz-form-label>
+        <nz-input-group>
+          <input formControlName="username" nz-input type="text" placeholder="Username"/>
+        </nz-input-group>
+      </nz-form-item>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="'vertical'">Created From</nz-form-label>
+        <nz-input-group>
+          <nz-date-picker
+              nzFormat="yyyy-MM-dd"
+              formControlName="createdFrom"
+              style="width: 100%;"
+          ></nz-date-picker>
+        </nz-input-group>
+      </nz-form-item>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="'vertical'">Created To</nz-form-label>
+        <nz-input-group>
+          <nz-date-picker
+              nzFormat="yyyy-MM-dd"
+              formControlName="createdTo"
+              style="width: 100%;"
+          ></nz-date-picker>
+        </nz-input-group>
+      </nz-form-item>
+    </div>
+  </div>
+  <nz-space style="float: right; margin-bottom: 20px;">
+    <button *nzSpaceItem nz-button nzType="primary" (click)="onApply()">
+      <span nz-icon nzType="search"></span>
+      Search
+    </button>
+    <button *nzSpaceItem nz-button (click)="onRefresh()" >
+      <span nz-icon nzType="undo" nzTheme="outline"></span>
+      Reset
+    </button>
+    <!-- <button *nzSpaceItem nz-button (click)="export()" style="background-color: orange;">
+      <span nz-icon nzType="download" nzTheme="outline"></span>
+      Export
+    </button> -->
+  </nz-space>
+</form>
+

@@ -1,0 +1,444 @@
+<nz-layout class="app-layout">
+  <nz-sider
+    nzTheme="light"
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <a href="/admin">
+        <img src="assets/logo.png" alt="logo" />
+        Help Desk
+      </a>
+    </div>
+    <ul
+      nz-menu
+      nzTheme="light"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li nz-submenu nzTitle="Product" nzIcon="shopping-cart" nzTheme="outline">
+        <ul>
+          <li nz-menu-item [routerLink]="'categories'">
+            <a>Category</a>
+          </li>
+          <li nz-menu-item [routerLink]="'products'">
+            <a>Product</a>
+          </li>
+        </ul>
+      </li>
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [routerLink]="'posts'"
+      >
+        <span nz-icon nzType="read"></span>
+        <span>Posts</span>
+      </li>
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [routerLink]="'feeds'"
+      >
+        <span nz-icon nzType="bank"></span>
+        <span>Deposit</span>
+      </li>
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [routerLink]="'payments'"
+      >
+        <span nz-icon nzType="account-book"></span>
+        <span>Payment</span>
+      </li>
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [routerLink]="'orders'"
+      >
+        <span nz-icon nzType="credit-card"></span>
+        <span>Order</span>
+      </li>
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [routerLink]="'customers'"
+      >
+        <span nz-icon nzType="user" nzTheme="outline"></span>
+        <span>Customer</span>
+      </li>
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [routerLink]="'tickets'"
+      >
+        <span nz-icon nzType="message" nzTheme="outline"></span>
+        <span>Tickets</span>
+      </li>
+      <!-- <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [routerLink]="'token-draw'">
+        <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+        <span>Mã tham gia</span>
+      </li> -->
+      <!-- <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [routerLink]="'pages'"
+        >
+        <span nz-icon nzType="pic-left"></span>
+        <span>Danh mục website</span>
+      </li>
+      <li nz-submenu nzTitle="Tin tức" nzIcon="highlight">
+        <ul>
+          <li nz-menu-item [routerLink]="'tags'">
+            <a>Tag</a>
+          </li>
+          <li nz-menu-item [routerLink]="'post-category'">
+            <a>Danh mục</a>
+          </li>
+          <li nz-menu-item [routerLink]="'posts'">
+            <a>Bài viết</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [routerLink]="'contacts'">
+        <span nz-icon nzType="message"></span>
+        <span>Liên hệ</span>
+      </li>
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [routerLink]="'subscribers'">
+        <span nz-icon nzType="team"></span>
+        <span>Người đăng ký</span>
+      </li>
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [routerLink]="'customers'">
+        <span nz-icon nzType="user"></span>
+        <span>Khách hàng</span>
+      </li>
+      <li nz-submenu nzTitle="Chăm sóc khách hàng" nzIcon="solution">
+        <ul>
+          <li nz-menu-item [routerLink]="'customer-care-types'">
+            <a>Danh mục FAQs</a>
+          </li>
+          <li nz-menu-item [routerLink]="'customer-care-lists'">
+            <a>FAQs</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Tự động hoá" nzIcon="robot">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>Basic Form</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Đối tác" nzIcon="apartment">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>Basic Form</a>
+          </li>
+        </ul>
+      </li> -->
+
+      <li nz-submenu nzTitle="Administration" nzIcon="setting">
+        <ul>
+          <li nz-menu-item [routerLink]="'users'">
+            <a>User</a>
+          </li>
+          <li nz-menu-item [routerLink]="'roles'">
+            <a>Role</a>
+          </li>
+        </ul>
+      </li>
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [routerLink]="'activities'"
+      >
+        <span nz-icon nzType="check" nzTheme="outline"></span>
+        <span>Activities</span>
+      </li>
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [routerLink]="'setting'"
+      >
+        <span nz-icon nzType="setting" nzTheme="outline"></span>
+        <span>Setting</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="body-content" [ngClass]="{ 'w-260': !isCollapsed }">
+    <nz-header>
+      <div class="logo"></div>
+      <div class="app-header" [ngClass]="{ 'w-260': !isCollapsed }">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <span
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></span>
+        </span>
+        <div
+          class="profile"
+          nz-dropdown
+          [nzDropdownMenu]="menu"
+          style="cursor: pointer"
+        >
+          <div class="group-user">
+            <div class="username">
+              <span>{{ user?.name }}</span>
+            </div>
+            <div class="role">
+              <span>{{ user?.role.name }}</span>
+            </div>
+          </div>
+          <nz-avatar
+            nzSize="large"
+            [nzSrc]="
+              user.profileImage ||
+              '//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+            "
+            style="vertical-align: middle"
+          ></nz-avatar>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item (click)="visible = true">
+                <a style="color: black">Thông tin cá nhân</a>
+              </li>
+              <li nz-menu-item>
+                <a href="/" style="color: black">Đăng xuất</a>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
+<app-digitop-drawer
+  [title]="'Thông tin cá nhân'"
+  [visible]="visible"
+  [size]="'large'"
+  (onConfirm)="confirmDrawer()"
+  (onLeave)="visible = false"
+>
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+      <form
+        nz-form
+        [nzLayout]="'inline'"
+        [formGroup]="userForm"
+        (ngSubmit)="confirmDrawer()"
+      >
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <app-digitop-upload
+                  [fileList]="profileImage"
+                  [title]="'Ảnh đại diện'"
+                  (changeFile)="changeFileUpload($event, 'profileImage')"
+                  [multiple]="false"
+                ></app-digitop-upload>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <nz-divider></nz-divider>
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzRequired]="true" [nzSpan]="'vertical'"
+                  >Quyền</nz-form-label
+                >
+                <nz-select formControlName="role">
+                  <nz-option nzLabel="Chọn quyền" nzValue=""> </nz-option>
+                  <nz-option
+                    *ngFor="let item of roleList"
+                    nzLabel="{{ item.name }}"
+                    nzValue="{{ item.value }}"
+                  >
+                  </nz-option>
+                </nz-select>
+                <div
+                  *ngIf="submitted && userForm.get('role')?.errors"
+                  class="input-text-error"
+                >
+                  <span>Vui lòng chọn quyền</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Is active</nz-form-label>
+                <br />
+                <nz-switch [(ngModel)]="statusValue" formControlName="active">
+                </nz-switch>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzRequired]="true" [nzSpan]="'vertical'"
+                  >Tên</nz-form-label
+                >
+                <nz-input-group>
+                  <input
+                    formControlName="name"
+                    [ngClass]="
+                      submitted && userForm.get('name')?.errors
+                        ? 'ant-input-status-error ng-invalid'
+                        : ''
+                    "
+                    nz-input
+                    placeholder="Tên"
+                  />
+                </nz-input-group>
+                <div
+                  *ngIf="submitted && userForm.get('name')?.errors?.['required']"
+                  class="input-text-error"
+                >
+                  <span>Vui lòng nhập tên</span>
+                </div>
+                <div
+                  *ngIf="submitted && (userForm.get('name')?.errors?.['minlength'] || userForm.get('name')?.errors?.['maxlength'])"
+                  class="input-text-error"
+                >
+                  <span>Tên nằm trong khoảng 5 đến 255 ký tự!</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzRequired]="true" [nzSpan]="'vertical'"
+                  >Email</nz-form-label
+                >
+                <nz-input-group>
+                  <input
+                    formControlName="email"
+                    [ngClass]="
+                      submitted && userForm.get('email')?.errors
+                        ? 'ant-input-status-error ng-invalid'
+                        : ''
+                    "
+                    nz-input
+                    placeholder="Email"
+                  />
+                </nz-input-group>
+                <div
+                  *ngIf="submitted && userForm.get('email')?.errors?.['required']"
+                  class="input-text-error"
+                >
+                  <span>Vui lòng nhập email</span>
+                </div>
+                <div
+                  *ngIf="submitted && userForm.get('email')?.errors?.['pattern']"
+                  class="input-text-error"
+                >
+                  <span>Vui lòng nhập định dạng email</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Password</nz-form-label>
+                <nz-input-group>
+                  <input
+                    type="password"
+                    formControlName="password"
+                    autocomplete="false"
+                    [ngClass]="
+                      submitted && userForm.get('password')?.errors
+                        ? 'ant-input-status-error ng-invalid'
+                        : ''
+                    "
+                    nz-input
+                    placeholder="Password"
+                  />
+                </nz-input-group>
+                <div
+                  *ngIf="submitted && userForm.get('password')?.errors?.['required']"
+                  class="input-text-error"
+                >
+                  <span>Vui lòng nhập password</span>
+                </div>
+                <div
+                  *ngIf="submitted && userForm.get('password')?.errors?.['minlength'] || userForm.get('password')?.errors?.['maxlength']"
+                  class="input-text-error"
+                >
+                  <span>Mật khẩu nằm trong khoảng 6 đến 255 ký tự!</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'"
+                  >Confirm password</nz-form-label
+                >
+                <nz-input-group>
+                  <input
+                    type="password"
+                    formControlName="confirmPassword"
+                    autocomplete="false"
+                    [ngClass]="
+                      submitted &&
+                      (userForm.get('confirmPassword')?.errors ||
+                        userForm.controls['confirmPassword'].value !==
+                          userForm.controls['password'].value)
+                        ? 'ant-input-status-error ng-invalid'
+                        : ''
+                    "
+                    nz-input
+                    placeholder="Confirm password"
+                  />
+                </nz-input-group>
+                <div
+                  *ngIf="submitted && userForm.get('confirmPassword')?.errors"
+                  class="input-text-error"
+                >
+                  <span>Vui lòng nhập confirm password</span>
+                </div>
+                <div
+                  *ngIf="
+                    submitted &&
+                    userForm.controls['confirmPassword'].value !==
+                      userForm.controls['password'].value
+                  "
+                  class="input-text-error"
+                >
+                  <span>Mật khẩu không trùng khớp</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </form>
+    </nz-spin>
+  </ng-container>
+</app-digitop-drawer>

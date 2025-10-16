@@ -1,0 +1,49 @@
+<div class="category" #mainScreen>
+  <nz-row [nzGutter]="16" class="head-table">
+    <div nz-col class="gutter-row pl-0" [nzSpan]="12">
+      <h3 style="padding-top: 6px;padding-left: 0;">HOẠT ĐỘNG ({{paginator.total}})</h3>
+    </div>
+    <!-- <div nz-col class="gutter-row filter-group" [nzSpan]="12">
+      <button nz-button nzType="default" class="second-background" (click)="onExport()">
+        <span nz-icon nzType="download"></span>
+        Export excel
+      </button>
+    </div> -->
+  </nz-row>
+  <div class="filter">
+    <app-filter-activity (onFilter)="onFilter($event)"></app-filter-activity>
+  </div>
+  <nz-table 
+    (nzQueryParams)="tableChange($event)" 
+    [nzScroll]="{ y: 'calc(100vh - 310px)' }" 
+    #tableActivity 
+    [nzTotal]="paginator.total" 
+    [nzPageSize]="paginator.limit" 
+    [nzPageIndex]="paginator.currentPage" 
+    nzOuterBordered 
+    [nzData]="listActivity" 
+    nzTableLayout="fixed" 
+    [nzLoading]="tableLoading"
+    nzShowSizeChanger
+    [nzFrontPagination]="false"
+    >
+    <thead>
+      <tr>
+        <th [nzSortFn]="true" [nzColumnKey]="'user'">User</th>
+        <th [nzSortFn]="true" [nzColumnKey]="'message_vi'">Message</th>
+        <th [nzSortFn]="true" [nzColumnKey]="'method'">Method</th>
+        <th [nzSortFn]="true" [nzColumnKey]="'createdAt'">Ngày tạo</th>
+      </tr>
+    </thead> 
+    <tbody *ngIf="listActivity?.length > 0">
+      <ng-container *ngFor="let data of tableActivity.data">
+        <tr>
+          <td>{{ data.user.name }}</td>
+          <td>{{ data.message_vi }}</td>
+          <td>{{ data.method }}</td>
+          <td>{{ data.createdAt }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</div>

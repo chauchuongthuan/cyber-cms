@@ -1,0 +1,73 @@
+<label class="labelForm">{{ title }}</label>
+<div nz-row>
+    <ng-container *ngFor="let file of fileList; index as i">
+        <div class="group-upload">
+            <nz-upload
+                class="avatar-uploader"
+                nzName="avatar"
+                nzListType="picture-card"
+                [nzShowUploadList]="false"
+                [nzBeforeUpload]="beforeUpload"
+            >
+                <ng-container *ngIf="!file.preview">
+                    <span
+                        class="upload-icon"
+                        nz-icon
+                        [nzType]="loading ? 'loading' : 'plus'"
+                    ></span>
+                    <div class="ant-upload-text">Upload</div>
+                </ng-container>
+                <img
+                    *ngIf="file.preview"
+                    [src]="file.preview"
+                    style="width: 100%"
+                />
+            </nz-upload>
+            <div *ngIf="file.preview" class="light-box">
+                <span
+                    nz-icon
+                    nzType="eye"
+                    nzTheme="outline"
+                    class="mr-2 icon"
+                    (click)="handlePreview(file)"
+                ></span>
+                <span
+                    *ngIf="deleteActive"
+                    nz-icon
+                    nzType="delete"
+                    nzTheme="outline"
+                    class="icon"
+                    (click)="remove(i)"
+                ></span>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="fileList && (fileList?.length < length || multiple)">
+        <nz-upload
+            class="avatar-uploader"
+            [nzDisabled]="disableUpload"
+            nzName="avatar"
+            nzListType="picture-card"
+            [nzShowUploadList]="false"
+            [nzBeforeUpload]="beforeUpload"
+        >
+            <span
+                class="upload-icon"
+                nz-icon
+                [nzType]="loading ? 'loading' : 'plus'"
+            ></span>
+            <div class="ant-upload-text">Upload</div>
+        </nz-upload>
+    </ng-container>
+</div>
+
+<nz-modal
+    [nzVisible]="previewVisible"
+    [nzContent]="modalContent"
+    [nzFooter]="null"
+    (nzOnCancel)="previewVisible = false"
+>
+    <ng-template #modalContent>
+        <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+    </ng-template>
+</nz-modal>

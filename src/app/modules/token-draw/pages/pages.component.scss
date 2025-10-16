@@ -1,0 +1,24 @@
+.ant-row {
+    width: 100%;
+    margin: 0 !important;
+}
+.filter {
+    margin: 0 0 20px 0;
+}
+[nz-button] {
+    margin-right: 8px;
+    margin-bottom: 12px;
+    margin-left: 8px;
+}
+.ant-picker-range {
+    width: 100%;
+}
+.filter-group {
+    // padding-top: 16px;
+    display: flex;
+    justify-content: end;
+    padding-right: 0 !important;
+}
+.head-table {
+    align-items: center;
+}

@@ -1,0 +1,26 @@
+<nz-collapse>
+  <nz-collapse-panel [nzHeader]="header" [nzExtra]="extraTpl">
+    <div *ngFor="let key of keys; let i = index">
+      <label nz-checkbox (ngModelChange)="onChange($event, key)" [ngModel]="checkedList.includes(key)">
+        <p>{{values[i]}}</p>
+      </label>
+    </div>
+  </nz-collapse-panel>
+</nz-collapse>
+<ng-template #header>
+  <div nz-col>
+    <div nz-row>
+      {{permission.group}}
+    </div>
+    <div nz-row>
+      <p>
+        <span *ngFor="let name of permissionNames()">
+          {{name}} -
+        </span>
+      </p>
+    </div>
+  </div>
+</ng-template>
+<ng-template #extraTpl>
+  <label nz-checkbox [ngModel]="isCheckedAll()" (ngModelChange)="onChangeAll($event)"></label>
+</ng-template>

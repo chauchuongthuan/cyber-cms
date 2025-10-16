@@ -1,0 +1,142 @@
+:host {
+    display: flex;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app-layout {
+    height: 100vh;
+}
+.body-content {
+    padding-left: 80px;
+}
+
+//scrollbar
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.menu-sidebar {
+    overflow: auto;
+    position: fixed;
+    z-index: 10;
+    height: 100%;
+    min-height: 100vh;
+    box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+}
+.profile {
+    padding-right: 24px;
+    display: flex;
+    .group-user {
+        line-height: 1.3;
+        padding-top: 5px;
+        text-align: right;
+        padding-right: 5px;
+        .username {
+            font-weight: bold;
+        }
+    }
+}
+.header-trigger {
+    padding: 20px 24px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s, padding 0s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+.sidebar-logo {
+    position: relative;
+    height: 64px;
+    overflow: hidden;
+    text-align: center;
+    line-height: 64px;
+    transition: all 0.3s;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.sidebar-logo img {
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    vertical-align: middle;
+}
+
+.w-260 {
+    padding-left: 256px;
+    transition: 0.1s;
+}
+
+.sidebar-logo h1 {
+    display: inline-block;
+    margin: 0 0 0 20px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+    vertical-align: middle;
+}
+
+nz-header {
+    padding: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.app-header {
+    width: 100%;
+    height: 64px;
+    padding: 0;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inner-content {
+    padding: 24px;
+    background: #fff;
+    height: 100%;
+    border-radius: 8px;
+}
+.ant-layout-header {
+    position: sticky;
+    top: 0;
+}
+.ant-row {
+    width: 100%;
+    margin: 0 !important;
+}
+.filter {
+    margin: 0 0 20px 0;
+}
+[nz-button] {
+    margin-right: 8px;
+    margin-bottom: 12px;
+}
+.ant-picker-range {
+    width: 100%;
+}
+.filter-group {
+    // padding-top: 16px;
+    display: flex;
+    justify-content: end;
+    padding-right: 0 !important;
+}
+.head-table {
+    align-items: center;
+}

@@ -1,0 +1,98 @@
+<div class="user" #mainScreen>
+    <nz-row [nzGutter]="16" class="head-table">
+      <div nz-col class="gutter-row pl-0" [nzSpan]="12">
+        <h3 style="padding-top: 6px;padding-left: 0;">MÃ THAM GIA ({{paginator.total}})</h3>
+      </div>
+      <app-import-data #importComponent></app-import-data>
+      <div nz-col class="gutter-row filter-group" [nzSpan]="12">
+        <app-action-token-draw #actionComponent (onSuccess)="onSuccess()"></app-action-token-draw>
+        <button nz-button nzType="default" class="second-background" (click)="importUser()">
+          <span nz-icon nzType="database"></span>
+          Import
+        </button>
+        <button nz-button nzType="default" class="second-background" (click)="exportUser()">
+          <span nz-icon nzType="download"></span>
+          Export excel
+        </button>
+        <button nz-button nzType="default"  nz-popconfirm
+        [nzPopconfirmTitle]="'Bạn có chắc muốn reset lại tất cả giải thưởng không ?'"
+        nzPopconfirmPlacement="bottom" class="second-background" (nzOnConfirm)="onResetAll()">
+          <span nz-icon nzType="reload"></span>
+          Reset All
+        </button>
+      </div>
+    </nz-row>
+    <div class="filter">
+      <app-filter-token-draw (onFilter)="onFilter($event)"></app-filter-token-draw>
+    </div>
+    <nz-table (nzQueryParams)="tableChange($event)" [nzScroll]="{ y: 'calc(100vh - 310px)' }" #tableSubscriber
+      [nzTotal]="paginator.total" [nzPageSize]="paginator.limit" [nzPageIndex]="paginator.currentPage" nzOuterBordered
+      [nzData]="data.data" nzTableLayout="fixed" [nzLoading]="tableLoading" nzShowSizeChanger
+      [nzFrontPagination]="false">
+      <thead>
+        <tr>
+          <!-- <th [nzWidth]="'50px'" [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th> -->
+          <th nzColumnKey="name" [nzSortFn]="true">Tên</th>
+          <th nzColumnKey="token" [nzSortFn]="true" >Mã</th>
+          <th nzColumnKey="isWin" [nzSortFn]="true">Trúng giải</th>
+          <th nzColumnKey="winDate" [nzSortFn]="true">Ngày trúng</th>
+          <th nzColumnKey="createdAt" [nzSortFn]="true">Ngày tạo</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody >
+        <ng-container>
+          <tr *ngFor="let renderData of data.data">
+            <!-- <td
+            [nzChecked]="setOfCheckedId.has(renderData.id )"
+            (nzCheckedChange)="onItemChecked(renderData.id , $event)"
+          ></td> -->
+          <td>
+            {{renderData.name}}
+          </td>
+          <td>
+            {{renderData.token}}
+          </td>
+          <td>
+            <div>
+              <nz-tag *ngIf="renderData.isWin == true" [nzColor]="'green'">Yes</nz-tag>
+              <nz-tag *ngIf="renderData.isWin == false" [nzColor]="'blue'">No</nz-tag>
+            </div>
+          </td>
+          <td>
+            {{renderData.winDate}}
+          </td>
+          <td>
+            {{renderData.createdAt}}
+          </td>
+          <td>
+            <button nz-button nzType="primary" (click)="onEdit(data)">
+              <span nz-icon nzType="edit"></span>
+            </button>
+            <button
+              nz-button
+              nzType="primary"
+              nzDanger
+              nz-popconfirm
+              [nzPopconfirmTitle]="'Bạn có chắc muốn xoá truyện này?'"
+              nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="onDelete(renderData.id)"
+            >
+              <span nz-icon nzType="delete"></span>
+            </button>
+            <button
+              nz-button
+              nzType="primary"
+              nz-popconfirm
+              [nzPopconfirmTitle]="'Bạn có chắc muốn reset lại giải thưởng không ? '"
+              nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="onReset(renderData.id)"
+            >
+              <span nz-icon nzType="reload"></span>
+            </button>
+          </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </nz-table>
+  </div>

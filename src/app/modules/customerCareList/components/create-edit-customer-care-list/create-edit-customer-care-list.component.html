@@ -1,0 +1,66 @@
+<button nz-button nzType="primary" (click)="showLarge()">
+  <span nz-icon nzType="plus"></span>
+  Tạo mới
+</button>
+<app-digitop-drawer [title]="state + ' FAQs'" [visible]="visible" [size]="size" (onConfirm)="confirmDrawer()"
+  (onLeave)="close()">
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="customerCareListForm" (ngSubmit)="confirmDrawer()">
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+              <nz-form-item>
+                <nz-form-control>
+                  <app-digitop-upload [fileList]="image" [title]="'Hình ảnh'"
+                    (changeFile)="changeFileUpload($event, 'image')" [multiple]="false"></app-digitop-upload>
+                </nz-form-control>
+              </nz-form-item>       
+            </div>
+        </div>  
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Tên <span class="required">(*)</span></nz-form-label>
+                <nz-input-group>
+                  <input formControlName="name"
+                    [ngClass]="submitted && customerCareListForm.get('name')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Tên"/>
+                </nz-input-group>
+                <div *ngIf="submitted && customerCareListForm.get('name')?.errors" class="input-text-error">
+                  <span>Vui lòng nhập tên</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Danh mục <span class="required">(*)</span></nz-form-label>
+                <nz-select formControlName="type" name="type">
+                  <nz-option *ngFor="let type of typeSelectData" [nzValue]="type.id" [nzLabel]="type.name"></nz-option>              
+                </nz-select>
+                <div *ngIf="submitted && customerCareListForm.get('type')?.errors" class="input-text-error">
+                  <span>Vui lòng chọn danh mục</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+              <nz-form-item>
+                <nz-form-control>
+                  <nz-form-label [nzSpan]="'vertical'">Nội dung</nz-form-label>
+                  <app-digitop-editor
+                    [initData]="this.dataEditor"
+                    (onChangeData)="onChangeEditor($event)"
+                  ></app-digitop-editor>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+        </div>   
+      </form>
+    </nz-spin>
+  </ng-container>
+</app-digitop-drawer>

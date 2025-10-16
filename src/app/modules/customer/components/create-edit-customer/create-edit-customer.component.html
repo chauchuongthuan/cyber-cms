@@ -1,0 +1,96 @@
+<button nz-button nzType="primary" (click)="showLarge()">
+  <span nz-icon nzType="plus"></span>
+  Create
+</button>
+<app-digitop-drawer [title]="state + ' customer'" [visible]="visible" [size]="size" (onConfirm)="confirmDrawer()"
+  (onLeave)="close()">
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="customerForm" (ngSubmit)="confirmDrawer()">
+
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzRequired]="true" [nzSpan]="'vertical'">Username</nz-form-label>
+                <nz-input-group>
+                  <input formControlName="username"
+                    [ngClass]="submitted && customerForm.get('username')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Username" />
+                </nz-input-group>
+                <div *ngIf="submitted && customerForm.get('username')?.errors?.['required']" class="input-text-error">
+                  <span>Please enter username</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzRequired]="true" [nzSpan]="'vertical'">Email</nz-form-label>
+                <nz-input-group>
+                  <input formControlName="email"
+                    [ngClass]="submitted && customerForm.get('email')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Email" />
+                </nz-input-group>
+                <div *ngIf="submitted && customerForm.get('email')?.errors?.['required']" class="input-text-error">
+                  <span>Please enter email</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzRequired]="true" [nzSpan]="'vertical'">Balance</nz-form-label>
+                <nz-input-group>
+                  <input formControlName="balance" type="number" min="0"
+                    [ngClass]="submitted && customerForm.get('balance')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Balance" />
+                </nz-input-group>
+                <div *ngIf="submitted && customerForm.get('balance')?.errors?.['required']" class="input-text-error">
+                  <span>Please enter balance</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzRequired]="!isEdit" [nzSpan]="'vertical'">Password</nz-form-label>
+                <nz-input-group>
+                  <input formControlName="password"
+                    [ngClass]="submitted && customerForm.get('password')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Password" type="password" />
+                </nz-input-group>
+                <div *ngIf="submitted && customerForm.get('password')?.errors" class="input-text-error">
+                  <span>Vui lòng nhập password</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzRequired]="!isEdit" [nzSpan]="'vertical'">Confirm password</nz-form-label>
+                <nz-input-group>
+                  <input type="password" formControlName="confirmPassword"
+                    [ngClass]="submitted && (customerForm.get('confirmPassword')?.errors || (customerForm.controls['confirmPassword'].value !== customerForm.controls['password'].value)) ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Confirm password" />
+                </nz-input-group>
+                <div *ngIf="submitted && customerForm.get('confirmPassword')?.errors" class="input-text-error">
+                  <span>Please enter confirm password!</span>
+                </div>
+                <div *ngIf="submitted && (customerForm.controls['confirmPassword'].value !== customerForm.controls['password'].value)" class="input-text-error">
+                  <span>Confirm password is wrong!</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </form>
+    </nz-spin>
+  </ng-container>
+</app-digitop-drawer>

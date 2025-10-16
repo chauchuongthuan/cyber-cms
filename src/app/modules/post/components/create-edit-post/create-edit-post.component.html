@@ -1,0 +1,159 @@
+<button nz-button nzType="primary" (click)="open()">
+  <span nz-icon nzType="plus"></span>
+  Create
+</button>
+<app-digitop-drawer
+  [title]="state + ' post'"
+  [visible]="visible"
+  [size]="size"
+  (onConfirm)="confirmDrawer()"
+  (onLeave)="close()"
+>
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+      <form
+        nz-form
+        [nzLayout]="'inline'"
+        [formGroup]="postForm"
+        (ngSubmit)="confirmDrawer()"
+      >
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="5">
+            <nz-form-item>
+              <nz-form-control>
+                <app-digitop-upload
+                  [fileList]="image"
+                  [title]="'Hình ảnh'"
+                  (changeFile)="changeFileUpload($event, 'image')"
+                  [multiple]="false"
+                ></app-digitop-upload>
+                <div
+                  *ngIf="submitted && postForm.get('image')?.errors"
+                  class="input-text-error"
+                >
+                  <span>Please select Image</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="24">
+            <div nz-row [nzGutter]="[hGutter, vGutter]">
+              <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'"
+                      >Post title
+                      <span class="required">(*)</span></nz-form-label
+                    >
+                    <nz-input-group>
+                      <input
+                        formControlName="title"
+                        [ngClass]="
+                          submitted && postForm.get('title')?.errors
+                            ? 'ant-input-status-error ng-invalid'
+                            : ''
+                        "
+                        nz-input
+                        placeholder="Title"
+                        (ngModelChange)="onChangeTitle()"
+                      />
+                    </nz-input-group>
+                    <div
+                      *ngIf="submitted && postForm.get('title')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please enter title</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'"
+                      >Slug <span class="required">(*)</span></nz-form-label
+                    >
+                    <nz-input-group>
+                      <input
+                        formControlName="slug"
+                        nz-input
+                        placeholder="Slug"
+                      />
+                    </nz-input-group>
+                    <div
+                      *ngIf="submitted && postForm.get('slug')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please enter slug</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'">Author</nz-form-label>
+                    <nz-input-group>
+                      <input
+                        formControlName="author"
+                        [ngClass]="
+                          submitted && postForm.get('author')?.errors
+                            ? 'ant-input-status-error ng-invalid'
+                            : ''
+                        "
+                        nz-input
+                        placeholder="Author"
+                      />
+                    </nz-input-group>
+                    <div
+                      *ngIf="submitted && postForm.get('author')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please enter author</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'">Read time</nz-form-label>
+                    <nz-input-group>
+                      <input
+                        formControlName="readTime"
+                        [ngClass]="
+                          submitted && postForm.get('readTime')?.errors
+                            ? 'ant-input-status-error ng-invalid'
+                            : ''
+                        "
+                        nz-input
+                        placeholder="Read time"
+                      />
+                    </nz-input-group>
+                    <div
+                      *ngIf="submitted && postForm.get('readTime')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please enter read time</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col class="gutter-row" [nzSpan]="24">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'">Content</nz-form-label>
+                    <app-digitop-editor
+                      [initData]="this.dataEditor"
+                      (onChangeData)="onChangeEditor($event)"
+                    ></app-digitop-editor>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </nz-spin>
+  </ng-container>
+</app-digitop-drawer>

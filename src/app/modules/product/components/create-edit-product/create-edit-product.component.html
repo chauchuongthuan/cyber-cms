@@ -1,0 +1,661 @@
+<button nz-button nzType="primary" (click)="open()">
+  <span nz-icon nzType="plus"></span>
+  Create
+</button>
+<app-digitop-drawer
+  [title]="state + ' product'"
+  [visible]="visible"
+  [size]="size"
+  (onConfirm)="confirmDrawer()"
+  (onLeave)="close()"
+>
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+      <form
+        nz-form
+        [nzLayout]="'inline'"
+        [formGroup]="productForm"
+        (ngSubmit)="confirmDrawer()"
+      >
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="5">
+            <nz-form-item>
+              <nz-form-control>
+                <app-digitop-upload
+                  [fileList]="image"
+                  [title]="'Hình ảnh'"
+                  (changeFile)="changeFileUpload($event, 'image')"
+                  [multiple]="false"
+                ></app-digitop-upload>
+                <div
+                  *ngIf="submitted && productForm.get('image')?.errors"
+                  class="input-text-error"
+                >
+                  <span>Please select Image</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="19">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'"
+                  >Quốc gia <span class="required">(*)</span></nz-form-label
+                >
+                <nz-select
+                  formControlName="countryName"
+                  name="countryName"
+                  nzShowSearch="true"
+
+                >
+                  <nz-option
+                    *ngFor="let item of countryList"
+                    [nzValue]="item?.name"
+                    [nzLabel]="item?.name"
+                  ></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="24">
+            <div nz-row [nzGutter]="[hGutter, vGutter]">
+              <div nz-col class="gutter-row" [nzSpan]="8">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'"
+                      >Product name
+                      <span class="required">(*)</span></nz-form-label
+                    >
+                    <nz-input-group>
+                      <input
+                        formControlName="name"
+                        [ngClass]="
+                          submitted && productForm.get('name')?.errors
+                            ? 'ant-input-status-error ng-invalid'
+                            : ''
+                        "
+                        nz-input
+                        placeholder="Name"
+                        (ngModelChange)="onChangeTitle('vi')"
+                      />
+                    </nz-input-group>
+                    <div
+                      *ngIf="submitted && productForm.get('name')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please enter name</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col class="gutter-row" [nzSpan]="8">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'"
+                      >Rating
+                      <span class="required">(*)</span></nz-form-label
+                    >
+                    <nz-input-group>
+                      <input
+                        formControlName="rating"
+                        [ngClass]="
+                          submitted && productForm.get('rating')?.errors
+                            ? 'ant-input-status-error ng-invalid'
+                            : ''
+                        "
+                        nz-input
+                        placeholder="Rating"
+                        (ngModelChange)="onChangeTitle('vi')"
+                      />
+                    </nz-input-group>
+                    <div
+                      *ngIf="submitted && productForm.get('rating')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please enter name</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col class="gutter-row" [nzSpan]="8">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'"
+                      >Verified <span class="required">(*)</span></nz-form-label
+                    >
+                    <nz-select
+                      (ngModelChange)="onChangeVerified($event)"
+                      ngDefaultControl
+                      formControlName="verified"
+                    >
+                      <ng-container>
+                        <nz-option
+                          [nzValue]="true"
+                          [nzLabel]="'Yes'"
+                        ></nz-option>
+                        <nz-option
+                          [nzValue]="false"
+                          [nzLabel]="'No'"
+                        ></nz-option>
+                      </ng-container>
+                    </nz-select>
+                    <div
+                      *ngIf="submitted && productForm.get('verified')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please select verified</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col class="gutter-row" [nzSpan]="24">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'"
+                      >Slug <span class="required">(*)</span></nz-form-label
+                    >
+                    <nz-input-group>
+                      <input
+                        formControlName="slug"
+                        nz-input
+                        placeholder="Slug"
+                      />
+                    </nz-input-group>
+                    <div
+                      *ngIf="submitted && productForm.get('slug')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please enter slug</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'"
+                  >Category <span class="required">(*)</span></nz-form-label
+                >
+                <nz-select
+                  (ngModelChange)="onChangeCategory($event)"
+                  ngDefaultControl
+                  formControlName="category"
+                >
+                  <ng-container *ngIf="categories && categories.length">
+                    <nz-option
+                      [nzValue]="item.id"
+                      [nzLabel]="item.name"
+                      *ngFor="let item of categories"
+                    ></nz-option>
+                  </ng-container>
+                </nz-select>
+                <div
+                  *ngIf="submitted && productForm.get('name')?.errors"
+                  class="input-text-error"
+                >
+                  <span>Please select category</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'"
+                  >Price <span class="required">(*)</span></nz-form-label
+                >
+                <nz-input-group>
+                  <input
+                    formControlName="price"
+                    nz-input
+                    placeholder="Price"
+                    type="number"
+                    min="1"
+                  />
+                </nz-input-group>
+                <div
+                  *ngIf="submitted && productForm.get('price')?.errors"
+                  class="input-text-error"
+                >
+                  <span>Please enter price!</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'"
+                  >Sort Order <span class="required">(*)</span></nz-form-label
+                >
+                <nz-input-group>
+                  <input
+                    formControlName="sortOrder"
+                    [ngClass]="
+                      submitted && productForm.get('sortOrder')?.errors
+                        ? 'ant-input-status-error ng-invalid'
+                        : ''
+                    "
+                    nz-input
+                    placeholder="Sort Order"
+                    type="number"
+                    min="1"
+                    step="1"
+                  />
+                </nz-input-group>
+                <div
+                  *ngIf="submitted && productForm.get('sortOrder')?.errors"
+                  class="input-text-error"
+                >
+                  <span>Please enter Sort Order</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'"
+                  >Quantity <span class="required">(*)</span></nz-form-label
+                >
+                <nz-input-group>
+                  <input
+                    formControlName="quantity"
+                    [ngClass]="
+                      submitted && productForm.get('quantity')?.errors
+                        ? 'ant-input-status-error ng-invalid'
+                        : ''
+                    "
+                    nz-input
+                    placeholder="Quantity"
+                    type="number"
+                    min="1"
+                    step="1"
+                  />
+                </nz-input-group>
+                <div
+                  *ngIf="submitted && productForm.get('quantity')?.errors"
+                  class="input-text-error"
+                >
+                  <span>Please enter quantity</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-control>
+                  <nz-form-label [nzSpan]="'vertical'">Nội dung</nz-form-label>
+                  <app-digitop-editor
+                      [initData]="this.dataEditor"
+                      (onChangeData)="onChangeEditor($event)"
+                  ></app-digitop-editor>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div class="">
+          <nz-divider nzText="Content"></nz-divider>
+          <div nz-row [nzGutter]="[hGutter, vGutter]">
+            <button
+              type="button"
+              nz-button
+              nzType="primary"
+              (click)="addContent()"
+            >
+              Add Content
+            </button>
+            <div
+              nz-col
+              class="gutter-row"
+              [nzSpan]="24"
+              *ngFor="let item of content; index as i"
+            >
+              <app-section-product
+                (onEnter)="addContent()"
+                (onDelete)="onDeleteContent(i)"
+                (onInput)="onChangeContent($event, i)"
+                [data]="item"
+              ></app-section-product>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="" style="width: 100%" *ngIf="isExploit">
+                    <div nz-row [nzGutter]="[hGutter, vGutter]">
+                        <div nz-col class="gutter-row" [nzSpan]="12">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <nz-form-label [nzSpan]="'vertical'"
+                                        >Title</nz-form-label
+                                    >
+                                    <nz-input-group>
+                                        <input
+                                            formControlName="title"
+                                            nz-input
+                                            placeholder="Title"
+                                            type="text"
+                                        />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col class="gutter-row" [nzSpan]="12">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <nz-form-label [nzSpan]="'vertical'"
+                                        >Sub text</nz-form-label
+                                    >
+                                    <nz-input-group>
+                                        <input
+                                            formControlName="subname"
+                                            nz-input
+                                            placeholder="Title"
+                                            type="text"
+                                        />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <nz-divider nzText="Section timeline"></nz-divider>
+                        <div nz-row [nzGutter]="[hGutter, vGutter]">
+                            <button
+                                style="margin-top: 10px"
+                                type="button"
+                                nz-button
+                                nzType="primary"
+                                (click)="addSectionTimeline()"
+                            >
+                                Add Section
+                            </button>
+                        </div>
+                        <div class="" nz-row [nzGutter]="[hGutter, vGutter]">
+                            <div
+                                nz-col
+                                style="position: relative"
+                                class="gutter-row"
+                                [nzSpan]="24"
+                                formArrayName="sectionTimeline"
+                                style="width: 100%"
+                                *ngFor="
+                                    let item of timeline?.controls;
+                                    let i = index
+                                "
+                            >
+                                <nz-collapse>
+                                    <nz-collapse-panel
+                                        [nzHeader]="'Slide ' + (i + 1)"
+                                    >
+                                        <div
+                                            [formGroupName]="i"
+                                            style="width: 100%"
+                                            nz-row
+                                            [nzGutter]="[hGutter, vGutter]"
+                                        >
+                                            <div
+                                                nz-col
+                                                class="gutter-row"
+                                                [nzSpan]="5"
+                                            >
+                                                <app-digitop-upload
+                                                    [fileList]="[
+                                                        item.get('image')?.value
+                                                    ]"
+                                                    [title]="'Hình ảnh'"
+                                                    [isUsingFormArray]="true"
+                                                    (changeFile)="
+                                                        changeFileUploadForm(
+                                                            $event,
+                                                            'timeline',
+                                                            i,
+                                                            'image'
+                                                        )
+                                                    "
+                                                    [multiple]="false"
+                                                ></app-digitop-upload>
+                                            </div>
+                                            <div
+                                                nz-col
+                                                class="gutter-row"
+                                                [nzSpan]="19"
+                                            >
+                                                <nz-form-item>
+                                                    <nz-form-control>
+                                                        <nz-form-label
+                                                            [nzSpan]="
+                                                                'vertical'
+                                                            "
+                                                            >Title
+                                                            <span
+                                                                class="required"
+                                                                >(*)</span
+                                                            ></nz-form-label
+                                                        >
+                                                        <nz-input-group>
+                                                            <input
+                                                                formControlName="title"
+                                                                nz-input
+                                                                placeholder="Title"
+                                                                type="text"
+                                                            />
+                                                        </nz-input-group>
+                                                    </nz-form-control>
+                                                </nz-form-item>
+                                            </div>
+                                            <div
+                                                nz-col
+                                                class="gutter-row"
+                                                [nzSpan]="24"
+                                            >
+                                                <nz-form-item>
+                                                    <nz-form-control>
+                                                        <nz-form-label
+                                                            [nzSpan]="
+                                                                'vertical'
+                                                            "
+                                                            >Description
+                                                            <span
+                                                                class="required"
+                                                                >(*)</span
+                                                            ></nz-form-label
+                                                        >
+                                                        <nz-input-group>
+                                                            <textarea
+                                                                rows="4"
+                                                                formControlName="description"
+                                                                nz-input
+                                                            ></textarea>
+                                                        </nz-input-group>
+                                                    </nz-form-control>
+                                                </nz-form-item>
+                                            </div>
+                                        </div>
+                                    </nz-collapse-panel>
+                                </nz-collapse>
+                                <span
+                                    nz-icon
+                                    style="
+                                        position: absolute;
+                                        right: 20px;
+                                        top: 20px;
+                                        cursor: pointer;
+                                        color: red;
+                                    "
+                                    nzType="delete"
+                                    nzTheme="outline"
+                                    (click)="removeTimeline(i)"
+                                ></span>
+                            </div>
+                        </div>
+                        <nz-divider nzText="Section feature"></nz-divider>
+                        <div nz-col class="gutter-row" [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <nz-form-label [nzSpan]="'vertical'"
+                                        >Title</nz-form-label
+                                    >
+                                    <nz-input-group>
+                                        <input
+                                            formControlName="featureTitle"
+                                            nz-input
+                                            placeholder="Title"
+                                            type="text"
+                                        />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col class="gutter-row" [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <nz-form-label [nzSpan]="'vertical'"
+                                        >Description</nz-form-label
+                                    >
+                                    <nz-input-group>
+                                        <textarea
+                                            rows="4"
+                                            formControlName="featureDescription"
+                                            nz-input
+                                        ></textarea>
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-row [nzGutter]="[hGutter, vGutter]">
+                            <button
+                                style="margin-top: 10px"
+                                type="button"
+                                nz-button
+                                nzType="primary"
+                                (click)="addSectionFeature()"
+                            >
+                                Add Section
+                            </button>
+                        </div>
+                        <div class="" nz-row [nzGutter]="[hGutter, vGutter]">
+                            <div
+                                nz-col
+                                style="position: relative"
+                                class="gutter-row"
+                                [nzSpan]="24"
+                                formArrayName="sectionFeature"
+                                style="width: 100%"
+                                *ngFor="
+                                    let item of features?.controls;
+                                    let i = index
+                                "
+                            >
+                                <nz-collapse>
+                                    <nz-collapse-panel
+                                        [nzHeader]="'Slide ' + (i + 1)"
+                                    >
+                                        <div
+                                            [formGroupName]="i"
+                                            style="width: 100%"
+                                            nz-row
+                                            [nzGutter]="[hGutter, vGutter]"
+                                        >
+                                            <div
+                                                nz-col
+                                                class="gutter-row"
+                                                [nzSpan]="5"
+                                            >
+                                                <app-digitop-upload
+                                                    [fileList]="[
+                                                        item.get('image')?.value
+                                                    ]"
+                                                    [title]="'Hình ảnh'"
+                                                    [isUsingFormArray]="true"
+                                                    (changeFile)="
+                                                        changeFileUploadForm(
+                                                            $event,
+                                                            'feature',
+                                                            i,
+                                                            'image'
+                                                        )
+                                                    "
+                                                    [multiple]="false"
+                                                ></app-digitop-upload>
+                                            </div>
+                                            <div
+                                                nz-col
+                                                class="gutter-row"
+                                                [nzSpan]="19"
+                                            >
+                                                <nz-form-item>
+                                                    <nz-form-control>
+                                                        <nz-form-label
+                                                            [nzSpan]="
+                                                                'vertical'
+                                                            "
+                                                            >Title
+                                                            <span
+                                                                class="required"
+                                                                >(*)</span
+                                                            ></nz-form-label
+                                                        >
+                                                        <nz-input-group>
+                                                            <input
+                                                                formControlName="title"
+                                                                nz-input
+                                                                placeholder="Title"
+                                                                type="text"
+                                                            />
+                                                        </nz-input-group>
+                                                    </nz-form-control>
+                                                </nz-form-item>
+                                            </div>
+                                            <div
+                                                nz-col
+                                                class="gutter-row"
+                                                [nzSpan]="24"
+                                            >
+                                                <nz-form-item>
+                                                    <nz-form-control>
+                                                        <nz-form-label
+                                                            [nzSpan]="
+                                                                'vertical'
+                                                            "
+                                                            >Description
+                                                            <span
+                                                                class="required"
+                                                                >(*)</span
+                                                            ></nz-form-label
+                                                        >
+                                                        <nz-input-group>
+                                                            <textarea
+                                                                rows="4"
+                                                                formControlName="description"
+                                                                nz-input
+                                                            ></textarea>
+                                                        </nz-input-group>
+                                                    </nz-form-control>
+                                                </nz-form-item>
+                                            </div>
+                                        </div>
+                                    </nz-collapse-panel>
+                                </nz-collapse>
+                                <span
+                                    nz-icon
+                                    style="
+                                        position: absolute;
+                                        right: 20px;
+                                        top: 20px;
+                                        cursor: pointer;
+                                        color: red;
+                                    "
+                                    nzType="delete"
+                                    nzTheme="outline"
+                                    (click)="removeFeature(i)"
+                                ></span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+      </form>
+    </nz-spin>
+  </ng-container>
+</app-digitop-drawer>

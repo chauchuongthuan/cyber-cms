@@ -1,0 +1,45 @@
+<button nz-button nzType="primary" (click)="showLarge()">
+    <span nz-icon nzType="plus"></span>
+    Tạo mới
+  </button>
+  <app-digitop-drawer [title]="state + ' mã số'" [visible]="visible" [size]="size" (onConfirm)="confirmDrawer()"
+    (onLeave)="close()">
+    <ng-container content>
+      <nz-spin [nzSpinning]="isLoading">
+        <form nz-form [nzLayout]="'inline'" [formGroup]="tokenDrawForm" (ngSubmit)="confirmDrawer()">
+          <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%;">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <nz-form-item>
+                <nz-form-control>
+                  <nz-form-label [nzRequired]="true" [nzSpan]="'vertical'">Tên người dùng</nz-form-label>
+                  <nz-input-group>
+                    <input formControlName="name"
+                      [ngClass]="submitted && tokenDrawForm.get('name')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                      nz-input placeholder="Tên" />
+                  </nz-input-group>
+                  <div *ngIf="submitted && tokenDrawForm.get('name')?.errors" class="input-text-error">
+                    <span>Vui lòng nhập tên người dùng</span>
+                  </div>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="12">
+              <nz-form-item>
+                <nz-form-control>
+                  <nz-form-label [nzRequired]="true" [nzSpan]="'vertical'"> Mã số</nz-form-label>
+                  <nz-input-group>
+                    <input formControlName="token"
+                      [ngClass]="submitted && tokenDrawForm.get('token')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                      nz-input placeholder="token" />
+                  </nz-input-group>
+                  <div *ngIf="submitted && tokenDrawForm.get('token')?.errors?.['required']" class="input-text-error">
+                    <span>Vui lòng nhập mã số</span>
+                  </div>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+        </form>
+      </nz-spin>
+    </ng-container>
+  </app-digitop-drawer>

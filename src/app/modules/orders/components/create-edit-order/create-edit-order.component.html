@@ -1,0 +1,76 @@
+<button nz-button nzType="primary" (click)="open()">
+  <span nz-icon nzType="plus"></span>
+  Create
+</button>
+<app-digitop-drawer [title]="state+' order'" [visible]="visible" 
+  [size]="size" (onConfirm)="confirmDrawer()" (onLeave)="close()">
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="orderForm" (ngSubmit)="confirmDrawer()">
+      <div nz-row [nzGutter]="[hGutter, vGutter]">
+        <div nz-col class="gutter-row" [nzSpan]="12">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">Customer</nz-form-label>
+              <nz-select ngDefaultControl formControlName="customer" [nzDisabled]="isEdit">
+                <nz-option *ngFor="let item of customers" [nzValue]="item.id" [nzLabel]="item.username"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col class="gutter-row" [nzSpan]="12">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">Product</nz-form-label>
+              <nz-select ngDefaultControl formControlName="product" [nzDisabled]="isEdit">
+                <nz-option *ngFor="let item of products" [nzValue]="item.id" [nzLabel]="item.name + ' | $'+item.price"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col class="gutter-row" [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">Quantity <span class="required">(*)</span></nz-form-label>
+              <nz-input-group>
+                <input formControlName="quantity" [ngClass]="submitted && orderForm.get('quantity')?.errors ? 'ant-input-status-error ng-invalid' : ''" nz-input placeholder="Quantity" type="number" min="1" step="1" [readonly]="isEdit" [ngClass]="isEdit ? 'disabled-ip' : ''" />
+              </nz-input-group>
+              <div *ngIf="submitted && orderForm.get('quantity')?.errors" class="input-text-error">
+                <span>Please enter quantity</span>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <!-- <div nz-col class="gutter-row" [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label [nzSpan]="'vertical'">Status</nz-form-label>
+              <nz-select ngDefaultControl formControlName="status" >
+                <nz-option [nzValue]="1" nzLabel="SUCCESS"></nz-option>
+                <nz-option [nzValue]="2" nzLabel="FAILED"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div> -->
+        <div nz-col class="gutter-row" [nzSpan]="24" *ngIf="isEdit">
+          <nz-descriptions nzTitle="Product detail" nzBordered>
+            <nz-descriptions-item nzTitle="Name">{{product?.name}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Category">{{product?.category?.name}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Price">{{product?.price}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Quantity">{{product?.quantity}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Content">
+              <li *ngFor="let item of product?.content">{{item}}</li>
+            </nz-descriptions-item>
+          </nz-descriptions>
+        </div>
+      </div>
+      <!-- <nz-divider nzText="Product Detail" *ngIf="isEdit"></nz-divider>
+      <div nz-row [nzGutter]="[hGutter, vGutter]">
+        <div nz-col class="gutter-row" [nzSpan]="24">
+
+        </div>
+      </div> -->
+    </form>
+  </nz-spin>
+  </ng-container>     
+</app-digitop-drawer>

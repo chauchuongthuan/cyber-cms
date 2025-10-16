@@ -1,0 +1,21 @@
+<app-digitop-drawer [title]="'Import mã số'" [visible]="visible" [size]="size" (onConfirm)="confirmDrawer()"
+    (onLeave)="close()">
+    <ng-container content>
+      <nz-spin [nzSpinning]="isLoading">
+        <form nz-form [nzLayout]="'inline'" [formGroup]="importForm" (ngSubmit)="confirmDrawer()">
+          <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%;">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                    <nz-form-control>
+                      <app-upload-file [fileList]="files"
+                        [title]="'Excel file'" (changeFile)="changeFileUpload($event, 'files')"
+                        [multiple]="false"
+                      ></app-upload-file>
+                    </nz-form-control>
+                  </nz-form-item>
+            </div>
+          </div>
+        </form>
+      </nz-spin>
+    </ng-container>
+  </app-digitop-drawer>

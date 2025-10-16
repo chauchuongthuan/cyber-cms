@@ -1,0 +1,33 @@
+<div class="login-page">
+    <div nz-row nzJustify="center">
+      <div nz-col nzXXl="8" nzXl="8" nzLg="8" nzMd="12" nzSm="24" nzXs="24">
+          <div class="form">
+              <form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                  <h2 class="title">Đăng nhập</h2>
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Vui lòng nhập tài khoản!">
+                      <nz-form-label [nzSpan]="'vertical'">Tài khoản</nz-form-label>
+                      <nz-input-group nzPrefixIcon="user">
+                        <input formControlName="email" nz-input placeholder="Username" />
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control nzErrorTip="Vui lòng nhập mật khẩu!">
+                      <nz-form-label [nzSpan]="'vertical'">Mật khẩu</nz-form-label>
+                      <nz-input-group nzPrefixIcon="lock">
+                        <input formControlName="password" nz-input type="password" placeholder="Password" />
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <button nz-button nzType="primary" nzBlock>Log in</button>
+                    </nz-form-control>
+                  </nz-form-item>
+                </form>
+          </div>
+      </div>
+    </div>
+    <br />
+</div>

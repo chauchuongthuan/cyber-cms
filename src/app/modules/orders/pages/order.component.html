@@ -1,0 +1,66 @@
+<div class="order" #mainScreen>
+  <nz-row [nzGutter]="16" class="head-table">
+    <div nz-col class="gutter-row pl-0" [nzSpan]="12">
+      <h3 style="padding-top: 6px;padding-left: 0;">PAYMENT ({{paginator.total}})</h3>
+    </div>
+    <div nz-col class="gutter-row filter-group" [nzSpan]="12">
+      <app-create-edit-order [customers]="customers" [products]="products" #editForm (onSuccess)="onSuccess()"></app-create-edit-order>
+      <button nz-button nzType="default" class="second-background" (click)="onExport()">
+        <span nz-icon nzType="download"></span>
+        Export excel
+      </button>
+    </div>
+  </nz-row>
+  <div class="filter">
+    <app-filter-order (onFilter)="onFilter($event)"></app-filter-order>
+  </div>
+  <nz-table 
+    (nzQueryParams)="tableChange($event)" 
+    [nzScroll]="{ y: 'calc(100vh - 310px)' }" 
+    #tableOrder 
+    [nzTotal]="paginator.total" 
+    [nzPageSize]="paginator.limit" 
+    [nzPageIndex]="paginator.currentPage" 
+    nzOuterBordered 
+    [nzData]="listOrder" 
+    nzTableLayout="fixed" 
+    [nzLoading]="tableLoading"
+    nzShowSizeChanger
+    [nzFrontPagination]="false"
+    >
+    <thead>
+      <tr>
+        <th [nzSortFn]="true" [nzColumnKey]="'id'">ID</th>
+        <th [nzSortFn]="true" [nzColumnKey]="'customer'">Customer</th>
+        <th [nzSortFn]="true" [nzColumnKey]="'product'">Product</th>
+        <th [nzSortFn]="true" [nzColumnKey]="'quantity'">Quantity</th>
+        <th [nzSortFn]="true" [nzColumnKey]="'createdAt'">Created At</th>
+        <th>Action</th>
+      </tr>
+    </thead> 
+    <tbody *ngIf="listOrder?.length > 0">
+      <ng-container *ngFor="let data of tableOrder.data">
+        <tr>
+          <td>{{ data.id }}</td>
+          <td>{{ data.customer?.username }}</td>
+          <td>{{ data.product?.name }}</td>
+          <td>{{ data.quantity }}</td>
+          <td>{{ data.createdAt }}</td>
+          <td>
+            <button nz-button nzType="primary" (click)="onEdit(data)" >
+              <span nz-icon nzType="edit"></span>
+            </button>
+            <button nz-button nzType="primary" nzDanger
+              nz-popconfirm
+              [nzPopconfirmTitle]="'Are you sure delete this task?'"
+              nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="onDelete(data.id)"
+            >
+              <span nz-icon nzType="delete"></span>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</div>

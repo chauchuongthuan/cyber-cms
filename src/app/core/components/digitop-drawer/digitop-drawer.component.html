@@ -1,0 +1,13 @@
+<nz-drawer [nzMaskClosable]="false" [nzSize]="size" [nzVisible]="visible" nzPlacement="right" [nzTitle]="title"
+  (nzOnClose)="close()" [nzFooter]="footer" [nzMaskClosable]="true">
+  <ng-content *nzDrawerContent select="[content]">
+    
+  </ng-content>
+</nz-drawer>
+
+<ng-template #footer>
+  <nz-space>
+    <button *nzSpaceItem nz-button (click)="close()">Cancel</button>
+    <button *nzSpaceItem nz-button nzType="primary" (click)="confirmDrawer()">Save</button>
+  </nz-space>
+</ng-template>

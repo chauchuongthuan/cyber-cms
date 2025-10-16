@@ -1,0 +1,35 @@
+<nz-form-label [nzSpan]="'vertical'">{{ title }}<span class="required">(*)</span></nz-form-label>
+<ng-container *ngFor="let file of fileList; index as i">
+  <div class="group-upload">
+    <nz-upload
+      class="avatar-uploader"
+      [nzAccept]="'.xlsx'"
+      nzName="avatar"
+      nzListType="picture-card"
+      [nzShowUploadList]="false"
+      [nzBeforeUpload]="beforeUpload"
+    >
+      <ng-container *ngIf="!file.preview">
+        <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+        <div class="ant-upload-text">Upload</div>
+      </ng-container>
+      <span *ngIf="file.preview" nz-icon nzType="file-done" nzTheme="outline"></span>
+    </nz-upload>
+    <div class="light-box">
+      <span nz-icon nzType="delete" nzTheme="outline" class="icon" (click)="remove(i)"></span>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="this.fileList && (this.fileList.length < this.length || multiple)">
+  <nz-upload
+    class="avatar-uploader"
+    nzName="avatar"
+    nzListType="picture-card"
+    [nzShowUploadList]="false"
+    [nzBeforeUpload]="beforeUpload"
+    [nzAccept]="'.xlsx'"
+  >
+    <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+    <div class="ant-upload-text">Upload</div>
+  </nz-upload>
+</ng-container>

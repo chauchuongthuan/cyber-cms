@@ -1,0 +1,435 @@
+<nz-row [nzGutter]="16" class="head-table">
+    <div nz-col class="gutter-row pl-0" [nzSpan]="12">
+        <h3 style="padding-top: 6px; padding-left: 0">SETTING</h3>
+    </div>
+    <div nz-col class="gutter-row filter-group" [nzSpan]="12"></div>
+</nz-row>
+<nz-spin [nzSpinning]="isLoading">
+    <form
+        nz-form
+        [nzLayout]="'inline'"
+        [formGroup]="formSetting"
+        (ngSubmit)="submitForm()"
+    >
+        <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="This field is required!">
+                        <nz-form-label [nzSpan]="'vertical'"
+                            >Email <span class="required">(*)</span>
+                        </nz-form-label>
+                        <nz-input-group>
+                            <input
+                                autocomplete="off"
+                                formControlName="email"
+                                nz-input
+                                placeholder="Email"
+                            />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label [nzSpan]="'vertical'">
+                            App password <span class="required">(*)</span>
+                        </nz-form-label>
+                        <nz-input-group>
+                            <input
+                                type="password"
+                                autocomplete="off"
+                                formControlName="appPass"
+                                nz-input
+                                placeholder="App password"
+                            />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="This field is required!">
+                        <nz-form-label [nzSpan]="'vertical'"
+                            >Telegram group link <span class="required">(*)</span>
+                        </nz-form-label>
+                        <nz-input-group>
+                            <input
+                                autocomplete="off"
+                                formControlName="telegramLink"
+                                nz-input
+                                placeholder="Telegram group link"
+                            />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label [nzSpan]="'vertical'">
+                            Telegram private <span class="required">(*)</span>
+                        </nz-form-label>
+                        <nz-input-group>
+                            <input
+                                type="text"
+                                autocomplete="off"
+                                formControlName="telegramPrivateLink"
+                                nz-input
+                                placeholder="Telegram private"
+                            />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label [nzSpan]="'vertical'">
+                            WhatsApp link <span class="required">(*)</span>
+                        </nz-form-label>
+                        <nz-input-group>
+                            <input
+                                type="text"
+                                autocomplete="off"
+                                formControlName="whatsappLink"
+                                nz-input
+                                placeholder="WhatsApp link"
+                            />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label [nzSpan]="'vertical'">
+                            WhatsApp private link <span class="required">(*)</span>
+                        </nz-form-label>
+                        <nz-input-group>
+                            <input
+                                type="text"
+                                autocomplete="off"
+                                formControlName="whatsappPrivateLink"
+                                nz-input
+                                placeholder="WhatsApp private link"
+                            />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-label [nzSpan]="'vertical'">
+                            YouTube link <span class="required">(*)</span>
+                        </nz-form-label>
+                        <nz-input-group>
+                            <input
+                                type="text"
+                                autocomplete="off"
+                                formControlName="youtubeLink"
+                                nz-input
+                                placeholder="YouTube link"
+                            />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%">
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control>
+                                <app-digitop-upload
+                                    [fileList]="BTC_qr"
+                                    [title]="'BTC QR Image'"
+                                    (changeFile)="changeFileUpload($event, 'BTC_qr')"
+                                    [multiple]="false"
+                                ></app-digitop-upload>
+                                <div
+                                    *ngIf="
+                                        submitted && formSetting.get('BTC_qr')?.errors
+                                    "
+                                    class="input-text-error"
+                                >
+                                    <span>Please select Qr</span>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="This field is required!">
+                                <nz-form-label [nzSpan]="'vertical'"
+                                    >BTC  Wallet <span class="required">(*)</span>
+                                </nz-form-label>
+                                <nz-input-group>
+                                    <input
+                                        autocomplete="off"
+                                        formControlName="BTC_wallet"
+                                        nz-input
+                                        placeholder="Wallet"
+                                    />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%">
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control>
+                                <app-digitop-upload
+                                    [fileList]="USDT_qr"
+                                    [title]="'USDT QR Image'"
+                                    (changeFile)="changeFileUpload($event, 'USDT_qr')"
+                                    [multiple]="false"
+                                ></app-digitop-upload>
+                                <div
+                                    *ngIf="
+                                        submitted && formSetting.get('USDT_qr')?.errors
+                                    "
+                                    class="input-text-error"
+                                >
+                                    <span>Please select Qr</span>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="This field is required!">
+                                <nz-form-label [nzSpan]="'vertical'"
+                                    >USDT Wallet <span class="required">(*)</span>
+                                </nz-form-label>
+                                <nz-input-group>
+                                    <input
+                                        autocomplete="off"
+                                        formControlName="USDT_wallet"
+                                        nz-input
+                                        placeholder="Wallet"
+                                    />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%">
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control>
+                                <app-digitop-upload
+                                    [fileList]="BEP20_qr"
+                                    [title]="'BEP20 QR Image'"
+                                    (changeFile)="changeFileUpload($event, 'BEP20_qr')"
+                                    [multiple]="false"
+                                ></app-digitop-upload>
+                                <div
+                                    *ngIf="
+                                        submitted && formSetting.get('BEP20_qr')?.errors
+                                    "
+                                    class="input-text-error"
+                                >
+                                    <span>Please select Qr</span>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="This field is required!">
+                                <nz-form-label [nzSpan]="'vertical'"
+                                    >BEP20 Wallet <span class="required">(*)</span>
+                                </nz-form-label>
+                                <nz-input-group>
+                                    <input
+                                        autocomplete="off"
+                                        formControlName="BEP20_wallet"
+                                        nz-input
+                                        placeholder="Wallet"
+                                    />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%">
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control>
+                                <app-digitop-upload
+                                    [fileList]="ERC20_qr"
+                                    [title]="'ERC20 QR Image'"
+                                    (changeFile)="changeFileUpload($event, 'ERC20_qr')"
+                                    [multiple]="false"
+                                ></app-digitop-upload>
+                                <div
+                                    *ngIf="
+                                        submitted && formSetting.get('ERC20_qr')?.errors
+                                    "
+                                    class="input-text-error"
+                                >
+                                    <span>Please select Qr</span>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="This field is required!">
+                                <nz-form-label [nzSpan]="'vertical'"
+                                    >ERC20 Wallet <span class="required">(*)</span>
+                                </nz-form-label>
+                                <nz-input-group>
+                                    <input
+                                        autocomplete="off"
+                                        formControlName="ERC20_wallet"
+                                        nz-input
+                                        placeholder="Wallet"
+                                    />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%">
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control>
+                                <app-digitop-upload
+                                    [fileList]="ETH_qr"
+                                    [title]="'ETH QR Image'"
+                                    (changeFile)="changeFileUpload($event, 'ETH_qr')"
+                                    [multiple]="false"
+                                ></app-digitop-upload>
+                                <div
+                                    *ngIf="
+                                        submitted && formSetting.get('ETH_qr')?.errors
+                                    "
+                                    class="input-text-error"
+                                >
+                                    <span>Please select Qr</span>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="This field is required!">
+                                <nz-form-label [nzSpan]="'vertical'"
+                                    >ETH  Wallet <span class="required">(*)</span>
+                                </nz-form-label>
+                                <nz-input-group>
+                                    <input
+                                        autocomplete="off"
+                                        formControlName="ETH_wallet"
+                                        nz-input
+                                        placeholder="Wallet"
+                                    />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%">
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control>
+                                <app-digitop-upload
+                                    [fileList]="LTC_qr"
+                                    [title]="'LTC QR Image'"
+                                    (changeFile)="changeFileUpload($event, 'LTC_qr')"
+                                    [multiple]="false"
+                                ></app-digitop-upload>
+                                <div
+                                    *ngIf="
+                                        submitted && formSetting.get('LTC_qr')?.errors
+                                    "
+                                    class="input-text-error"
+                                >
+                                    <span>Please select Qr</span>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="This field is required!">
+                                <nz-form-label [nzSpan]="'vertical'"
+                                    >LTC Wallet <span class="required">(*)</span>
+                                </nz-form-label>
+                                <nz-input-group>
+                                    <input
+                                        autocomplete="off"
+                                        formControlName="LTC_wallet"
+                                        nz-input
+                                        placeholder="Wallet"
+                                    />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+            <!-- <div nz-col class="gutter-row" [nzSpan]="8">
+                <div nz-row [nzGutter]="[hGutter, vGutter]" style="width: 100%">
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control>
+                                <app-digitop-upload
+                                    [fileList]="BCH_qr"
+                                    [title]="'BCH QR Image'"
+                                    (changeFile)="changeFileUpload($event, 'BCH_qr')"
+                                    [multiple]="false"
+                                ></app-digitop-upload>
+                                <div
+                                    *ngIf="
+                                        submitted && formSetting.get('BCH_qr')?.errors
+                                    "
+                                    class="input-text-error"
+                                >
+                                    <span>Please select Qr</span>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="This field is required!">
+                                <nz-form-label [nzSpan]="'vertical'"
+                                    >BCH Wallet <span class="required">(*)</span>
+                                </nz-form-label>
+                                <nz-input-group>
+                                    <input
+                                        autocomplete="off"
+                                        formControlName="BCH_wallet"
+                                        nz-input
+                                        placeholder="Wallet"
+                                    />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div> -->
+            
+        </div>
+        <div style="padding-top: 15px" nz-row [nzGutter]="[hGutter, vGutter]">
+            <div nz-col class="gutter-row" [nzSpan]="12">
+                <button nz-button [nzType]="'primary'">Save</button>
+            </div>
+        </div>
+    </form>
+</nz-spin>

@@ -1,0 +1,6 @@
+<nz-input-group [nzSuffix]="suffixTemplate">
+    <input (keypress)="enterEvent($event)" nz-input placeholder="Content" (change)="onChange($event)" [(ngModel)]="data"/>
+</nz-input-group>
+<ng-template #suffixTemplate >
+    <span (click)="clickDelete()" style="cursor: pointer;" nz-icon nzType="close" nzTheme="outline"></span>
+  </ng-template>

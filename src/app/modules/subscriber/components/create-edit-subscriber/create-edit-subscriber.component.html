@@ -1,0 +1,63 @@
+<!-- <button nz-button nzType="primary" (click)="showLarge()">
+  <span nz-icon nzType="plus"></span>
+  Tạo mới
+</button> -->
+<app-digitop-drawer [title]="state + ' người đăng ký'" [visible]="visible" [size]="size" (onConfirm)="confirmDrawer()"
+  (onLeave)="close()">
+  <ng-container content>
+    <nz-spin [nzSpinning]="isLoading">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="subscriberForm" (ngSubmit)="confirmDrawer()">
+        <div nz-row [nzGutter]="[hGutter, vGutter]">
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Title <span class="required">(*)</span></nz-form-label>
+                <nz-input-group>
+                  <input formControlName="title"
+                    [ngClass]="submitted && subscriberForm.get('title')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Title" readonly />
+                </nz-input-group>
+                <div *ngIf="submitted && subscriberForm.get('title')?.errors?.['required']" class="input-text-error">
+                  <span>Vui lòng nhập title</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Reason <span class="required">(*)</span></nz-form-label>
+                <nz-input-group>
+                  <input formControlName="reason"
+                    [ngClass]="submitted && subscriberForm.get('reason')?.errors ? 'ant-input-status-error ng-invalid' : ''"
+                    nz-input placeholder="Reason" readonly />
+                </nz-input-group>
+                <div *ngIf="submitted && subscriberForm.get('reason')?.errors?.['required']" class="input-text-error">
+                  <span>Vui lòng nhập reason</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label [nzSpan]="'vertical'">Message <span class="required">(*)</span></nz-form-label>
+                <nz-input-group>
+                    <textarea
+                    rows="4"
+                    formControlName="message"
+                    nz-input
+                    readonly
+                  ></textarea>
+                </nz-input-group>
+                <div *ngIf="submitted && subscriberForm.get('message')?.errors?.['required']" class="input-text-error">
+                  <span>Vui lòng nhập reason</span>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </form>
+    </nz-spin>
+  </ng-container>
+</app-digitop-drawer>
