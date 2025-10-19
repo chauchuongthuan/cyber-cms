@@ -117,7 +117,9 @@
               <div nz-col class="gutter-row" [nzSpan]="12">
                 <nz-form-item>
                   <nz-form-control>
-                    <nz-form-label [nzSpan]="'vertical'">Read time</nz-form-label>
+                    <nz-form-label [nzSpan]="'vertical'"
+                      >Read time</nz-form-label
+                    >
                     <nz-input-group>
                       <input
                         formControlName="readTime"
@@ -135,6 +137,30 @@
                       class="input-text-error"
                     >
                       <span>Please enter read time</span>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <div nz-col class="gutter-row" [nzSpan]="12">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-form-label [nzSpan]="'vertical'"
+                      >Featured</nz-form-label
+                    >
+                    <nz-input-group>
+                      <nz-select
+                        formControlName="featured"
+                        name="featured"
+                      >
+                      <nz-option nzValue="true" nzLabel="Yes"></nz-option>
+                        <nz-option nzValue="false" nzLabel="No"></nz-option>
+                      </nz-select>
+                    </nz-input-group>
+                    <div
+                      *ngIf="submitted && postForm.get('featured')?.errors"
+                      class="input-text-error"
+                    >
+                      <span>Please enter featured</span>
                     </div>
                   </nz-form-control>
                 </nz-form-item>

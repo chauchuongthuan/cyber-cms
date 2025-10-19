@@ -6,5 +6,6 @@ export interface IPost {
     title: string;
     content: any;
     readTime: string;
+    featured: boolean;
     createdAt: string;
 }

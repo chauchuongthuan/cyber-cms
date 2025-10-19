@@ -65,6 +65,7 @@ export class CreateEditPostComponent implements OnInit {
             slug: new FormControl("", [Validators.required]),
             author: new FormControl("", []),
             readTime: new FormControl("", []),
+            featured: new FormControl("false", []),
         });
     }
     initData(data: IPost) {
@@ -79,6 +80,7 @@ export class CreateEditPostComponent implements OnInit {
         this.postForm.controls["title"].setValue(data?.title);
         this.postForm.controls["slug"].setValue(data?.slug);
         this.postForm.controls["content"].setValue(data?.content);
+        this.postForm.controls["featured"].setValue(data?.featured == true ? "true" : "false");
         setTimeout(() => {
             this.dataEditor = data?.content;
         }, 350);
@@ -143,8 +145,9 @@ export class CreateEditPostComponent implements OnInit {
         this.isLoading = true;
         let data = {
             ...this.postForm.value,
+            featured: this.postForm.value.featured == "true" ? true : false,
         };
-
+        
         let formData = convertToFormDataV2(data, ["image"]);
 
         if (this.isEdit)
