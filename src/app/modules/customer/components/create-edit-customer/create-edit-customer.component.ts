@@ -54,8 +54,9 @@ export class CreateEditCustomerComponent implements OnInit {
     return this.fb.group({
       username: new FormControl('',[Validators.required]),
       email: new FormControl('',[Validators.required]),
-      balance: new FormControl('',[Validators.required]),
-      password: new FormControl(0,[Validators.required]),
+      roleType: new FormControl('normal',[Validators.required]),
+      balance: new FormControl(0,[Validators.required]),
+      password: new FormControl('',[Validators.required]),
       confirmPassword: new FormControl('',[Validators.required]),
    });
   }
@@ -66,6 +67,7 @@ export class CreateEditCustomerComponent implements OnInit {
     this.customerForm = this.fb.group({
       username: new FormControl(data.username, [Validators.required]),
       email: new FormControl(data.email, [Validators.required]),
+      roleType: new FormControl(data.roleType || 'normal', [Validators.required]),
       balance: new FormControl(data.balance, [Validators.required]),
       password: new FormControl('', []),
       confirmPassword: new FormControl('', []),

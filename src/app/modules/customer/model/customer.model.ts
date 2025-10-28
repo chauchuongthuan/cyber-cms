@@ -3,6 +3,7 @@ export interface ICustomer {
   username: string
   email: string
   balance: any
+  roleType: string
   createdAt: string
 }
 
