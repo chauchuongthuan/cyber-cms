@@ -63,17 +63,17 @@ export class CreateEditProductComponent implements OnInit {
             country: new FormControl(null, []),
             countryName: new FormControl(null, []),
             category: new FormControl("", [Validators.required]),
-            rating: new FormControl("", [Validators.required]),
+            // rating: new FormControl("", [Validators.required]),
             content: new FormControl([], []),
             title: new FormControl("", []),
-            subname: new FormControl("", []),
+            // subname: new FormControl("", []),
             info: new FormControl("", []),
             description: new FormControl("", []),
             sortOrder: new FormControl("", [Validators.required]),
-            quantity: new FormControl("", [Validators.required]),
+            // quantity: new FormControl("", [Validators.required]),
             name: new FormControl("", [Validators.required]),
             slug: new FormControl("", [Validators.required]),
-            price: new FormControl(0, []),
+            // price: new FormControl(0, []),
             sectionTimeline: this.fb.array([]),
             featureTitle: new FormControl("", []),
             featureDescription: new FormControl("", []),
@@ -153,20 +153,20 @@ export class CreateEditProductComponent implements OnInit {
         this.productForm.controls["category"].setValue(data.category._id);
         this.productForm.controls["countryName"].setValue(data.countryName);
         this.productForm.controls["country"].setValue(data?.country);
-        this.productForm.controls["rating"].setValue(data.rating);
+        // this.productForm.controls["rating"].setValue(data.rating);
         this.productForm.controls["image"].setValue({
             value: null,
             preview: data.image,
         });
-        this.productForm.controls["quantity"].setValue(data?.quantity);
+        // this.productForm.controls["quantity"].setValue(data?.quantity);
         this.productForm.controls["title"].setValue(data?.title);
-        this.productForm.controls["subname"].setValue(data?.subname);
+        // this.productForm.controls["subname"].setValue(data?.subname);
         // this.productForm.controls["info"].setValue(data?.info);
         // this.productForm.controls["description"].setValue(data?.description);
         this.productForm.controls["name"].setValue(data?.name);
         this.productForm.controls["slug"].setValue(data?.slug);
         this.productForm.controls["content"].setValue(data?.content);
-        this.productForm.controls["price"].setValue(data?.price);
+        // this.productForm.controls["price"].setValue(data?.price);
         this.productForm.controls["verified"].setValue(data?.verified || false);
         this.productForm.controls["featureTitle"].setValue(
             data?.page?.sectionFeature?.featureTitle

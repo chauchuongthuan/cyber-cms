@@ -48,7 +48,7 @@ export class CreateEditOrderComponent implements OnInit {
     return this.fb.group({
       customer: new FormControl('', [Validators.required]),
       product: new FormControl('', [Validators.required]),
-      quantity: new FormControl('', [Validators.required]),
+      // quantity: new FormControl('', [Validators.required]),
       order: new FormControl('', [Validators.required]),
    });
   }
@@ -60,7 +60,7 @@ export class CreateEditOrderComponent implements OnInit {
     this.orderForm = this.fb.group({
       customer: new FormControl(data.customer._id, [Validators.required]),
       product: new FormControl(data.product._id, [Validators.required]),
-      quantity: new FormControl(data.quantity, [Validators.required]),
+      // quantity: new FormControl(data.quantity, [Validators.required]),
       order: new FormControl(data.quantity, [Validators.required]),
     });
   }

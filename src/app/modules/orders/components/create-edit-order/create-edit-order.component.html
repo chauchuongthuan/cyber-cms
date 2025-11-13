@@ -1,7 +1,7 @@
-<button nz-button nzType="primary" (click)="open()">
+<!-- <button nz-button nzType="primary" (click)="open()">
   <span nz-icon nzType="plus"></span>
   Create
-</button>
+</button> -->
 <app-digitop-drawer [title]="state+' order'" [visible]="visible" 
   [size]="size" (onConfirm)="confirmDrawer()" (onLeave)="close()">
   <ng-container content>
@@ -23,12 +23,12 @@
             <nz-form-control>
               <nz-form-label [nzSpan]="'vertical'">Product</nz-form-label>
               <nz-select ngDefaultControl formControlName="product" [nzDisabled]="isEdit">
-                <nz-option *ngFor="let item of products" [nzValue]="item.id" [nzLabel]="item.name + ' | $'+item.price"></nz-option>
+                <nz-option *ngFor="let item of products" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
-        <div nz-col class="gutter-row" [nzSpan]="24">
+        <!-- <div nz-col class="gutter-row" [nzSpan]="24">
           <nz-form-item>
             <nz-form-control>
               <nz-form-label [nzSpan]="'vertical'">Quantity <span class="required">(*)</span></nz-form-label>
@@ -40,7 +40,7 @@
               </div>
             </nz-form-control>
           </nz-form-item>
-        </div>
+        </div> -->
         <!-- <div nz-col class="gutter-row" [nzSpan]="24">
           <nz-form-item>
             <nz-form-control>
@@ -56,11 +56,11 @@
           <nz-descriptions nzTitle="Product detail" nzBordered>
             <nz-descriptions-item nzTitle="Name">{{product?.name}}</nz-descriptions-item>
             <nz-descriptions-item nzTitle="Category">{{product?.category?.name}}</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Price">{{product?.price}}</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Quantity">{{product?.quantity}}</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Content">
+            <!-- <nz-descriptions-item nzTitle="Price">{{product?.price}}</nz-descriptions-item> -->
+            <!-- <nz-descriptions-item nzTitle="Quantity">{{product?.quantity}}</nz-descriptions-item> -->
+            <!-- <nz-descriptions-item nzTitle="Content">
               <li *ngFor="let item of product?.content">{{item}}</li>
-            </nz-descriptions-item>
+            </nz-descriptions-item> -->
           </nz-descriptions>
         </div>
       </div>

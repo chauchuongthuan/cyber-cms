@@ -2,8 +2,9 @@ export interface ICustomer {
   id: string
   username: string
   email: string
-  balance: any
+  // balance: any
   roleType: string
+  roleAssignedAt: any
   createdAt: string
 }
 

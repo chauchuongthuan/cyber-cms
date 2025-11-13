@@ -59,12 +59,16 @@ export class CustomerComponent implements OnInit {
         name: 'Telegram UserId',
       },
       {
-        dataIndex: "balance",
-        name: "Balance",
+        dataIndex: "roleType",
+        name: "Role",
+      },
+      {
+        dataIndex: "roleAssignedAt",
+        name: "Role assigned at",
       },
       {
         dataIndex: "createdAt",
-        name: "Created At",
+        name: "Register At",
       },
       {
         dataIndex: "action",
@@ -120,13 +124,9 @@ export class CustomerComponent implements OnInit {
           },
         ];
         
-        let createdAt = new Date(item.createdAt).toLocaleString("en-GB", {
-          timeZone: "Asia/Ho_Chi_Minh",
-        });
         return {
           ...item,
           action,
-          createdAt,
         };
       });
       this.paginator = {

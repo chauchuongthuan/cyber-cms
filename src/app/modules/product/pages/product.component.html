@@ -33,9 +33,9 @@
         <th [nzColumnKey]="'image'">Image</th>
         <th [nzSortFn]="true" [nzColumnKey]="'name'">Name</th>
         <th [nzSortFn]="true" [nzColumnKey]="'category'">Category</th>
-        <th [nzSortFn]="true" [nzColumnKey]="'price'">Price</th>
+        <!-- <th [nzSortFn]="true" [nzColumnKey]="'price'">Price</th> -->
         <th [nzSortFn]="true" [nzColumnKey]="'sortOrder'">Sort Order</th>
-        <th [nzSortFn]="true" [nzColumnKey]="'verified'">Verified</th>
+        <!-- <th [nzSortFn]="true" [nzColumnKey]="'verified'">Verified</th> -->
         <th [nzSortFn]="true" [nzColumnKey]="'createdAt'">Created At</th>
         <th>Action</th>
       </tr>
@@ -48,12 +48,12 @@
           </td>
           <td>{{ data.name }}</td>
           <td>{{ data.category.name }}</td>
-          <td>{{ data.price }}</td>
+          <!-- <td>{{ data.price }}</td> -->
           <td>{{ data.sortOrder }}</td>
-          <td>
+          <!-- <td>
             <nz-tag *ngIf="data.verified" [nzColor]="'blue'">TRUE</nz-tag>
             <nz-tag *ngIf="!data.verified" [nzColor]="'red'">FALSE</nz-tag>
-          </td>
+          </td> -->
           <td>{{ data.createdAt }}</td>
           <td>
             <button nz-button nzType="primary" (click)="onEdit(data)" >

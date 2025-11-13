@@ -55,22 +55,25 @@ export class CreateEditCustomerComponent implements OnInit {
       username: new FormControl('',[Validators.required]),
       email: new FormControl('',[Validators.required]),
       roleType: new FormControl('normal',[Validators.required]),
-      balance: new FormControl(0,[Validators.required]),
+      // balance: new FormControl(0,[Validators.required]),
       password: new FormControl('',[Validators.required]),
       confirmPassword: new FormControl('',[Validators.required]),
+      // roleAssignedAt: new FormControl(null,[]),
    });
   }
 
   dataInit(data: ICustomer, action: boolean){
+    console.log("data?.roleAssignedAt::", data?.roleAssignedAt);
     this.isEdit = action;
     this.state = 'Edit';
     this.customerForm = this.fb.group({
       username: new FormControl(data.username, [Validators.required]),
       email: new FormControl(data.email, [Validators.required]),
       roleType: new FormControl(data.roleType || 'normal', [Validators.required]),
-      balance: new FormControl(data.balance, [Validators.required]),
+      // balance: new FormControl(data.balance, [Validators.required]),
       password: new FormControl('', []),
       confirmPassword: new FormControl('', []),
+      // roleAssignedAt: new FormControl(data.roleAssignedAt ? new Date(data?.roleAssignedAt) : '', []),
     });
     this.idEdit = data.id;
   }

@@ -1,7 +1,7 @@
 <div class="order" #mainScreen>
   <nz-row [nzGutter]="16" class="head-table">
     <div nz-col class="gutter-row pl-0" [nzSpan]="12">
-      <h3 style="padding-top: 6px;padding-left: 0;">PAYMENT ({{paginator.total}})</h3>
+      <h3 style="padding-top: 6px;padding-left: 0;">ORDER ({{paginator.total}})</h3>
     </div>
     <div nz-col class="gutter-row filter-group" [nzSpan]="12">
       <app-create-edit-order [customers]="customers" [products]="products" #editForm (onSuccess)="onSuccess()"></app-create-edit-order>
@@ -33,7 +33,7 @@
         <th [nzSortFn]="true" [nzColumnKey]="'id'">ID</th>
         <th [nzSortFn]="true" [nzColumnKey]="'customer'">Customer</th>
         <th [nzSortFn]="true" [nzColumnKey]="'product'">Product</th>
-        <th [nzSortFn]="true" [nzColumnKey]="'quantity'">Quantity</th>
+        <!-- <th [nzSortFn]="true" [nzColumnKey]="'quantity'">Quantity</th> -->
         <th [nzSortFn]="true" [nzColumnKey]="'createdAt'">Created At</th>
         <th>Action</th>
       </tr>
@@ -44,7 +44,7 @@
           <td>{{ data.id }}</td>
           <td>{{ data.customer?.username }}</td>
           <td>{{ data.product?.name }}</td>
-          <td>{{ data.quantity }}</td>
+          <!-- <td>{{ data.quantity }}</td> -->
           <td>{{ data.createdAt }}</td>
           <td>
             <button nz-button nzType="primary" (click)="onEdit(data)" >
